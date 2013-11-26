@@ -3,11 +3,6 @@ dim advdata(30)
 
 # system boot event listener
 event system_boot(major, minor, patch, build, ll_version, protocol_version, hw)
-
-  # Set advertisement interval to 125ms.
-  # Use all three advertisement channels
-  call gap_set_adv_parameters(200, 200, 7)
-
   # Initialize iBeacon ADV data
   # Flags = LE General Discovery, single mode device (02 01 06)
   advdata(0:1) = $02
@@ -50,16 +45,14 @@ event system_boot(major, minor, patch, build, ll_version, protocol_version, hw)
 
   # Measured TX power : -58
   advdata(29:1) = $c6
-  # Set advertisement data
-  call gap_set_adv_data(0, 30, advdata(0:30))
 
-  #set to advertising mode - with user data
-  call gap_set_mode(4, gap_undirected_connectable)
+  call gap_set_adv_parameters(200, 200, 7)
+  call gap_set_adv_data(0, 30, advdata(0:30))
+  call gap_set_mode(gap_general_discoverable, gap_undirected_connectable)
 end
 
 # Disconnection event listener
 event connection_disconnected(handle, result)
+  call gap_set_mode(gap_general_discoverable, gap_undirected_connectable)
   call gap_set_adv_parameters(200, 200, 7)
-  #set to advertising mode - with user data
-  call gap_set_mode(4, gap_undirected_connectable)
 end

@@ -3,17 +3,14 @@
 
   <service uuid="1800">
     <description>Generic Access Profile</description>
-
     <characteristic uuid="2a00">
       <properties read="true" const="true"/>
-      <value>iBeacon Demo</value>
+      <value>iBeacon</value>
     </characteristic>
-
     <characteristic uuid="2a01">
       <properties read="true" const="true"/>
       <value type="hex">0200</value>
     </characteristic>
-
   </service>
 
   <service uuid="180a">
@@ -21,17 +18,17 @@
 
     <characteristic uuid="2a29">
       <properties read="true" const="true" />
-      <value>Bluegiga BLE113</value>
+      <value>Bluegiga BLE112</value>
     </characteristic>
 
     <characteristic uuid="2a24">
       <properties read="true" const="true" />
-      <value>113</value>
+      <value>112</value>
     </characteristic>
 
     <characteristic uuid="2a26">
       <properties read="true" const="true" />
-      <value>1.2.1</value>
+      <value>0.0.1</value>
     </characteristic>
 
     <characteristic uuid="2a27">
