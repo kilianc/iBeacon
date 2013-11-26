@@ -53,6 +53,5 @@ end
 
 # Disconnection event listener
 event connection_disconnected(handle, result)
-  #call gap_set_mode(gap_user_data, gap_undirected_connectable)
-  call gap_set_mode(gap_general_discoverable, gap_undirected_connectable)
+  call gap_set_mode(gap_user_data, gap_undirected_connectable)
 end
