@@ -1,0 +1,27 @@
+dim nil
+dim adv_data(30)
+
+procedure load_adv_data()
+  # Buffers are backwards
+  adv_data(0:3) = $060201     # Flags, single mode device
+  adv_data(3:2) = $ff1a       # Manufacturer data
+  adv_data(5:4) = $1502004c   # Preamble
+
+  # Read iBeacon conf from GATT file
+  # call attributes_read(handle, offset)(handle, offset, result, value_len, value_data)
+  call attributes_read(xgatt_ibeacon_uuid, 0)(nil, nil, nil, nil, adv_data(9:16))
+  call attributes_read(xgatt_ibeacon_major, 0)(nil, nil, nil, nil, adv_data(25:2))
+  call attributes_read(xgatt_ibeacon_minor, 0)(nil, nil, nil, nil, adv_data(27:2))
+  call attributes_read(xgatt_ibeacon_tx_pwr, 0)(nil, nil, nil, nil, adv_data(29:1))
+end
+
+event system_boot(major, minor, patch, builvar, ll_version, protocol_version, hw)
+  call load_adv_data()
+  call gap_set_adv_parameters(1600, 1600, 7)
+  call gap_set_adv_data(0, 30, adv_data(0:30))
+  call gap_set_mode(gap_user_data, gap_undirected_connectable)
+end
+
+event connection_disconnected(handle, result)
+  call gap_set_mode(gap_user_data, gap_undirected_connectable)
+end

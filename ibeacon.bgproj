@@ -3,6 +3,6 @@
     <device type="ble112" />
     <gatt in="gatt.xml" />
     <hardware in="hardware.xml" />
-    <script in="script.bgs" />
-    <image out="out.hex" />
+    <script in="main.bgs" />
+    <image out="ibeacon.hex" />
 </project>
