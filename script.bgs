@@ -1,0 +1,65 @@
+# ADVertizement data
+dim advdata(30)
+
+# system boot event listener
+event system_boot(major, minor, patch, build, ll_version, protocol_version, hw)
+
+  # Set advertisement interval to 125ms.
+  # Use all three advertisement channels
+  call gap_set_adv_parameters(200, 200, 7)
+
+  # Initialize iBeacon ADV data
+  # Flags = LE General Discovery, single mode device (02 01 06)
+  advdata(0:1) = $02
+  advdata(1:1) = $01
+  advdata(2:1) = $06
+  # Manufacturer data
+  advdata(3:1) = $1a
+  advdata(4:1) = $ff
+  # Preamble
+  advdata(5:1) = $4c
+  advdata(6:1) = $00
+  advdata(7:1) = $02
+  advdata(8:1) = $15
+
+  # Apple AirLocate Service UUID: e2c56db5-dffb-48d2-b060-d0f5a71096e0
+  advdata(9:1)  = $e2
+  advdata(10:1) = $c5
+  advdata(11:1) = $6d
+  advdata(12:1) = $b5
+  advdata(13:1) = $df
+  advdata(14:1) = $fb
+  advdata(15:1) = $48
+  advdata(16:1) = $d2
+  advdata(17:1) = $b0
+  advdata(18:1) = $60
+  advdata(19:1) = $d0
+  advdata(20:1) = $f5
+  advdata(21:1) = $a7
+  advdata(22:1) = $10
+  advdata(23:1) = $96
+  advdata(24:1) = $e0
+
+  # Major : 00
+  advdata(25:1) = $00
+  advdata(26:1) = $00
+
+  # Minor : 00 00
+  advdata(27:1) = $00
+  advdata(28:1) = $00
+
+  # Measured TX power : -58
+  advdata(29:1) = $c6
+  # Set advertisement data
+  call gap_set_adv_data(0, 30, advdata(0:30))
+
+  #set to advertising mode - with user data
+  call gap_set_mode(4, gap_undirected_connectable)
+end
+
+# Disconnection event listener
+event connection_disconnected(handle, result)
+  call gap_set_adv_parameters(200, 200, 7)
+  #set to advertising mode - with user data
+  call gap_set_mode(4, gap_undirected_connectable)
+end

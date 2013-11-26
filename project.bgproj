@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project>
+    <device type="ble112" />
+    <gatt in="gatt.xml" />
+    <hardware in="hardware.xml" />
+    <script in="script.bgs" />
+    <image out="out.hex" />
+</project>
