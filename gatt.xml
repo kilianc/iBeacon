@@ -37,7 +37,6 @@
       <properties read="true" const="true" />
       <value>1.0</value>
     </characteristic>
-
   </service>
 
   <service uuid="06F5641F-4340-47D8-BB87-E5121946E7B7">
