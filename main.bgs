@@ -2,13 +2,11 @@ dim nil
 dim adv_data(30)
 
 procedure load_adv_data()
-  # Buffers are backwards
-  adv_data(0:3) = $060201     # Flags, single mode device
-  adv_data(3:2) = $ff1a       # Manufacturer data
-  adv_data(5:4) = $1502004c   # Preamble
-
   # Read iBeacon conf from GATT file
   # call attributes_read(handle, offset)(handle, offset, result, value_len, value_data)
+  call attributes_read(xgatt_ibeacon_flags, 0)(nil, nil, nil, nil, adv_data(0:3))
+  call attributes_read(xgatt_ibeacon_manu, 0)(nil, nil, nil, nil, adv_data(3:2))
+  call attributes_read(xgatt_ibeacon_preamble, 0)(nil, nil, nil, nil, adv_data(5:4))
   call attributes_read(xgatt_ibeacon_uuid, 0)(nil, nil, nil, nil, adv_data(9:16))
   call attributes_read(xgatt_ibeacon_major, 0)(nil, nil, nil, nil, adv_data(25:2))
   call attributes_read(xgatt_ibeacon_minor, 0)(nil, nil, nil, nil, adv_data(27:2))
