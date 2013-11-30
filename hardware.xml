@@ -2,6 +2,5 @@
 <hardware>
   <sleeposc enable="true" ppm="30" />
   <usart channel="1" alternate="1" baud="115200" endpoint="none" flow="false" />
-  <port index="0" tristatemask="0" pull="up" />
   <script enable="true" />
 </hardware>
